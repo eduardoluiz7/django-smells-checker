@@ -17,13 +17,14 @@ def god_view_checker(code):
     visitor.visit(tree)
 
 
-def processar_diretorio_bc(diretorio):
-    print(os.get_exec_path())
+def processar_diretorio(diretorio):
     for raiz, diretorios, arquivos in os.walk(diretorio):
-        print(arquivos)
         for nome_arquivo in arquivos:
             if nome_arquivo.endswith('.py'):
                 caminho_completo = os.path.join(raiz, nome_arquivo)
                 with open(caminho_completo, 'r', encoding='utf-8') as arquivo:
                     conteudo = arquivo.read()
                     bulk_create_checker(conteudo)
+                    god_view_checker(conteudo)
+
+processar_diretorio("repositorio")
